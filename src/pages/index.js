@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'components/layout';
 import Box from 'components/box';
 import Gallery from 'components/gallery';
 import IOExample from 'components/io-example';
+import { useFetch } from '../common/hooks';
 import { graphql } from 'gatsby';
 
 const Index = ({ data }) => {
+  const repoData = useFetch('http://localhost:9000/myrepos', {});
+  const [repos, setRepos] = useState([]);
+
+  useEffect(() => {
+    console.log('Hello world');
+    if (repoData.data.viewer) {
+      setRepos(repoData.data.viewer.repositories.nodes);
+    }
+  }, [repoData]);
+
   return (
     <Layout>
       <Box>
@@ -16,7 +27,9 @@ const Index = ({ data }) => {
           }}
         />
       </Box>
-      <Gallery items={data.homeJson.gallery} />
+      {!repoData.loading && (
+        <Gallery items={repos.map(r => ({ title: r.name }))} />
+      )}
       <div style={{ height: '50vh' }} />
       <IOExample />
     </Layout>
@@ -28,7 +41,7 @@ Index.propTypes = {
 
 export default Index;
 
-export const pageQuery = graphql`
+export const query = graphql`
   query HomePageQuery {
     homeJson {
       content {
@@ -53,28 +66,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-// export const query = graphql`
-//   query HomepageQuery {
-//     homeJson {
-//       title
-//       gallery {
-//         title
-//         copy
-//         image {
-//           childImageSharp {
-//             fluid(maxHeight: 500, quality: 90) {
-//               ...GatsbyImageSharpFluid_withWebp
-//             }
-//           }
-//         }
-//       }
-//     }
-//       content {
-//         childMarkdownRemark {
-//           html
-//           rawMarkdownBody
-//         }
-//       }
-//   }
-// `;
