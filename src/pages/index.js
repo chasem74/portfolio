@@ -11,13 +11,13 @@ const Index = ({ data }) => {
   return (
     <Layout>
       <Box>
-        <Box>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data.homeJson.content.childMarkdownRemark.html,
-            }}
-          />
-        </Box>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data.homeJson.content.childMarkdownRemark.html,
+          }}
+        />
+      </Box>
+      <Box>
         <Modal>
           <video
             src="https://i.imgur.com/gzFqNSW.mp4"
