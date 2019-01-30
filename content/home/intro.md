@@ -1,4 +1,8 @@
-## TODO: Make this read prettier/trendier
+---
+path: "/"
+---
+
+# TODO: Make this read prettier/trendier
 
 ---
 

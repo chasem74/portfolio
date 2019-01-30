@@ -4,7 +4,6 @@ import Layout from 'components/layout';
 import Box from 'components/box';
 import Gallery from 'components/gallery';
 import IOExample from 'components/io-example';
-import Modal from 'containers/modal';
 import { graphql } from 'gatsby';
 
 const Index = ({ data }) => {
@@ -16,17 +15,6 @@ const Index = ({ data }) => {
             __html: data.homeJson.content.childMarkdownRemark.html,
           }}
         />
-      </Box>
-      <Box>
-        <Modal>
-          <video
-            src="https://i.imgur.com/gzFqNSW.mp4"
-            playsInline
-            loop
-            autoPlay
-            muted
-          />
-        </Modal>
       </Box>
       <Gallery items={data.homeJson.gallery} />
       <div style={{ height: '50vh' }} />
@@ -40,14 +28,15 @@ Index.propTypes = {
 
 export default Index;
 
-export const query = graphql`
-  query HomepageQuery {
+export const pageQuery = graphql`
+  query HomePageQuery {
     homeJson {
-      title
       content {
         childMarkdownRemark {
           html
-          rawMarkdownBody
+          frontmatter {
+            path
+          }
         }
       }
       gallery {
@@ -64,3 +53,28 @@ export const query = graphql`
     }
   }
 `;
+
+// export const query = graphql`
+//   query HomepageQuery {
+//     homeJson {
+//       title
+//       gallery {
+//         title
+//         copy
+//         image {
+//           childImageSharp {
+//             fluid(maxHeight: 500, quality: 90) {
+//               ...GatsbyImageSharpFluid_withWebp
+//             }
+//           }
+//         }
+//       }
+//     }
+//       content {
+//         childMarkdownRemark {
+//           html
+//           rawMarkdownBody
+//         }
+//       }
+//   }
+// `;
