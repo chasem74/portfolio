@@ -1,30 +1,31 @@
 import { useState, useEffect } from 'react';
 
 const useFetch = (url, initialData) => {
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState(initialData);
 
   useEffect(() => {
-    (async () => {
-      setLoading(true);
+    setLoading(true);
+
+    async function doFetch() {
       try {
         const response = await fetch(url);
         if (response.ok) {
-          const data = await response.json();
-          setData(data);
+          const json = await response.json();
+          setData(json);
         } else {
-          setError(new Error(response.statusText));
+          setData(null);
         }
-      } catch (e) {
-        setError(e);
+      } catch (error) {
+        setData(error);
       }
+    }
 
-      setLoading(false);
-    })();
+    doFetch();
+    setLoading(false);
   }, [url]);
 
-  return { error, loading, data };
+  return { loading, result: data };
 };
 
 const useLocalStorage = (key, initialValue) => {

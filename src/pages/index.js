@@ -8,15 +8,14 @@ import { useFetch } from '../common/hooks';
 import { graphql } from 'gatsby';
 
 const Index = ({ data }) => {
-  const repoData = useFetch('http://localhost:9000/myrepos', {});
+  const { result } = useFetch('http://localhost:9000/myrepos', {});
   const [repos, setRepos] = useState([]);
 
   useEffect(() => {
-    console.log('Hello world');
-    if (repoData.data.viewer) {
-      setRepos(repoData.data.viewer.repositories.nodes);
+    if (result.data) {
+      setRepos(result.data.viewer.repositories.nodes);
     }
-  }, [repoData]);
+  }, [result]);
 
   return (
     <Layout>
@@ -27,9 +26,9 @@ const Index = ({ data }) => {
           }}
         />
       </Box>
-      {!repoData.loading && (
-        <Gallery items={repos.map(r => ({ title: r.name }))} />
-      )}
+      <Gallery
+        items={repos.map(r => ({ title: r.name, description: r.description }))}
+      />
       <div style={{ height: '50vh' }} />
       <IOExample />
     </Layout>
