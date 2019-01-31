@@ -8,7 +8,7 @@ import { useFetch } from '../common/hooks';
 import { graphql } from 'gatsby';
 
 const Index = ({ data }) => {
-  const { result } = useFetch('http://localhost:9000/myrepos', {});
+  const { result } = useFetch('/.netlify/functions/myrepos', {});
   const [repos, setRepos] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const Index = ({ data }) => {
       </Box>
       <Gallery
         items={repos.map(r => ({ title: r.name, description: r.description }))}
+        title="My Github Projects"
       />
       <div style={{ height: '50vh' }} />
       <IOExample />
