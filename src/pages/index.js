@@ -26,6 +26,7 @@ const Index = ({ data }) => {
           items={result.map(r => ({
             title: r.name,
             description: r.description,
+            url: r.url,
           }))}
           title="My Github Projects"
         />
