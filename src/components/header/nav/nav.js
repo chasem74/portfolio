@@ -1,18 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { Container } from './nav.css';
+import Nav from 'react-bootstrap/Nav';
 
-const Nav = () => (
-  <Container>
-    <ul>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
-      <li>
-        <a href="https://github.com/chasem74">GitHub</a>
-      </li>
-    </ul>
-  </Container>
+//import { Container } from './nav.css';
+
+const MainNav = () => (
+  <Nav className="mr-auto">
+    <Nav.Link as="span">
+      <Link to="/about">About</Link>
+    </Nav.Link>
+    <Nav.Link as="span">
+      <Link to="/">Projects</Link>
+    </Nav.Link>
+  </Nav>
 );
 
-export default Nav;
+MainNav.propTypes = {
+  title: PropTypes.string,
+};
+
+export default MainNav;
