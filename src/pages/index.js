@@ -36,6 +36,7 @@ const Index = ({ data }) => {
     </Layout>
   );
 };
+
 Index.propTypes = {
   data: PropTypes.object.isRequired,
 };
