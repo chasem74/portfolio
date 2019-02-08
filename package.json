@@ -25,6 +25,7 @@
     "@reach/visually-hidden": "^0.1.1",
     "axios": "^0.18.0",
     "babel-plugin-styled-components": "^1.10.0",
+    "bootstrap": "^4.2.1",
     "circular-json": "^0.5.9",
     "dotenv": "^6.2.0",
     "gatsby": "^2.0.106",
