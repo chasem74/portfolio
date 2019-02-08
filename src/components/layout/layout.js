@@ -6,12 +6,12 @@ import Header from 'components/header';
 import GlobalStyle from 'global.css.js';
 
 const Layout = ({ data, children }) => (
-  <div>
+  <React.Fragment>
     <GlobalStyle />
     <Head />
     <Header title={data.site.siteMetadata.siteTitle} />
     {children}
-  </div>
+  </React.Fragment>
 );
 
 Layout.propTypes = {
